@@ -2,7 +2,7 @@
 
 ## Chapter 1: Reliable, Scalable, and Maintainable Applications
 
-**Reliability:** The System should continue to work correctly (performing the correct function at the desired level of performance) even in the face of aversity (hardware or software faults, and even human error).
+**Reliability:** The System should continue to work correctly (performing the correct function at the desired level of performance) even in the face of adversity (hardware or software faults, and even human error).
 
 **Scalability:** As the system grows (in data volume, traffic volume, or complexity), there should be reasonable ways of dealing with that growth.
 
@@ -12,17 +12,17 @@
 
 * The Application performs the function that the user expected
 * It can tolerate the user making mistakes or using the software in unexpected ways
-* Its performance is good enough for the regured use cases, under the expected ways.
-* The system prevents any unothorized access and abuse.
+* Its performance is good enough for the required use cases, under the expected ways.
+* The system prevents any unauthorized access and abuse.
 
 **Fault vs Failure**:
 
-* Fault: one component of thr system deviating from the spec.
+* Fault: one component of the system deviating from the spec.
 * Failure: System as a whole stops providing the required service to the user.
 
 Best to design fault-resistant systems. Ex: Chaos Monkey: It consistently tries randomized use cases to break the code application. Doing this reveals faults quicky and continuously.
 
-**Security**: Focus on filure prevention over fault-resistant (single failure could realease critical information)
+**Security**: Focus on failure prevention over fault-resistant (single failure could release critical information)
 
 #### Hardware Faults
 
@@ -32,12 +32,12 @@ If one machine fails there is unlikely cause to expect others to fail.
 #### Software Errors
 
 Can cause larger, cascading problems resulting in more machines crashing.
-Usually caused by dormant assumptions about the environment it will run in. There is not quick solution, however lots of small things can help.
+Usually caused by dormant assumptions about the environment it will run in. There is no quick solution, however lots of small things can help.
 
 * Carefully thinking about assumptions and interactions in a system.
-* Thorough testing
-* Process isolation
-* Allowing processes to crash and restart
+* Thorough testing.
+* Process isolation.
+* Allowing processes to crash and restart.
 * Measuring, Monitoring and analyzing system behaviour in production.
 * If a system provides some guarantee, have regular automated checks while it is running and be alerted if there is a descrepency.
 
@@ -48,11 +48,11 @@ The most common cause of outages. Usually due to human configs.
 To mitigate:
 
 * Design systems to minimize oppurtunity for error: ex: APIs, abstraction etc...
-* Decouple places where people make the most mistakes and the places likely to cause failure. ex: use sandbox with fully featured non prod environments with real data that does not affect users
+* Decouple places where people make the most mistakes and the places likely to cause failure. ex: use sandbox with fully featured non-prod environments with real data that does not affect users.
 * Testing... lots of testing
-* Allow quick recovery: ex: fast rollback of changes, gradually release new changes so people affected are minimal.
-* Telemetry: Monitor performance and error rates (Think telemetry when a rocket has lifted off)
-* Good managment and training
+* Allow quick recovery: ex: fast rollback of changes, gradually release new changes so number of people affected are minimal.
+* Telemetry: Monitor performance and error rates (Think telemetry when a rocket has lifted off).
+* Good managment and training (This needs a whole other book).
 
 #### How Important is Reliability
 
@@ -75,13 +75,11 @@ Twitter uses both versions now. Caching for almost all users and global collecti
 
 #### Describing Performance
 
-Note: I need clarification on response time vs service time
-
-* Response time: What the client sees
-* Latency: how long a request is waiting to be handled (time in line?)
+* Response time: What the client sees.
+* Latency: how long a request is waiting to be handled (time in line?).
 * Service time: How long it takes to process the request. Network delays and queueing delays.
 
-When measureing response times, bestter to use percentiles instead of mean response time. Use median response time.
+When measureing response times, better to use percentiles instead of mean response time. Use median response time.
 
 Slowest response times are usualy from your most valuable clients as they are processing the most data ex: amazon customer with a very large cart.
 
@@ -89,10 +87,10 @@ It only takes a small number of slow requests to slow down everyone elses becaus
 
 #### Approaches for Coping with Load
 
-* Vertical scaling: Improving thep performance of a single machine to handle more load.
+* Vertical scaling: Improving the performance of a single machine to handle more load.
 * Horizontal Scaling: Distributing the load across multiple machines.
 
-Good architecture usually uses a combination of the two. (NOTE: I have previously had an intuition toward Horizontal Scaling, this is not always the best approach. Consider a lot of very small VM's compared to one or 2 more powerful machines that could do the same load. A good balance between the two is needed)
+Good architecture usually uses a combination of the two. (NOTE: I have previously had an intuition toward Horizontal Scaling, this is not always the best approach. Consider a lot of very small VM's compared to one or two more powerful machines that could do the same load. A good balance between the two is needed)
 
 There can be manual or elastic scaling.
 
@@ -102,12 +100,12 @@ There is no *magic scaling sauce* one size fits all scalable architecture. The a
 
 "An achitecture that scales well for a particular application is built around assumptions of which operations will be common and which will be rare".
 
-Early stage start up it is more importatn to be able to iterate quickly on product features than it is to scale to some hypothetical future load.
+Early stage start up, it is more important to be able to iterate quickly on product features than it is to scale to some hypothetical future load.
 (Note: Point taken, no point scaling until you can reliably have enough growth that you will have to scale. Step 1 get growth, step to scale.)
 
 ### Maintainability
 
-* Operabity: Make it easy for operations team to keep the sysyem running smoothly.
+* Operabity: Make it easy for operations team to keep the system running smoothly.
 * Simplicty: Make it easy for new engineers to understand the system by removing complexity (this does not mean simple interfaces)
 * Evolvability/Extensibility/Modifiability/Plasticity: Make it easy for engineers to make changes to the system in the future, adapting it for unanticipated use cases.
 
@@ -131,7 +129,7 @@ Data systems can be used to help make routine tasks easy
 
 One of the best tools we have for removing accidental complexity is *abstraction*. Using Facade design pattern. ex of abstraction: programming language hides complexity of computers
 
-Abstraction is when you still use something but its implementation saves you from having to think about how it is done.
+Abstraction is when you still use something but its implementation saves you from having to think about/understand how it is done.
 
 #### Evolvability: Making Change Easy
 
