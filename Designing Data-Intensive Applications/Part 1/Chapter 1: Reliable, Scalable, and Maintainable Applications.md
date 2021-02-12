@@ -8,7 +8,7 @@
 
 **Maintainability:** Over time, many different people will work on the system (engineering and operations, both maintaining current behaviour and adapting the system to new use cases), and they should be able to work on it productively.
 
-### Reliabilty (Continuing to work correctly even when things go wrong)
+### Reliability (Continuing to work correctly even when things go wrong)
 
 * The Application performs the function that the user expected
 * It can tolerate the user making mistakes or using the software in unexpected ways
@@ -52,7 +52,7 @@ To mitigate:
 * Testing... lots of testing
 * Allow quick recovery: ex: fast rollback of changes, gradually release new changes so number of people affected are minimal.
 * Telemetry: Monitor performance and error rates (Think telemetry when a rocket has lifted off).
-* Good managment and training (This needs a whole other book).
+* Good management and training (This needs a whole other book).
 
 #### How Important is Reliability
 
@@ -79,11 +79,11 @@ Twitter uses both versions now. Caching for almost all users and global collecti
 * Latency: how long a request is waiting to be handled (time in line?).
 * Service time: How long it takes to process the request. Network delays and queueing delays.
 
-When measureing response times, better to use percentiles instead of mean response time. Use median response time.
+When measuring response times, better to use percentiles instead of mean response time. Use median response time.
 
-Slowest response times are usualy from your most valuable clients as they are processing the most data ex: amazon customer with a very large cart.
+Slowest response times are usually from your most valuable clients as they are processing the most data ex: amazon customer with a very large cart.
 
-It only takes a small number of slow requests to slow down everyone elses because of backlog. Only so much parallel processing can be done. This is why it is important to measure reponse time for clients.
+It only takes a small number of slow requests to slow down everyone elses because of backlog. Only so much parallel processing can be done. This is why it is important to measure response time for clients.
 
 #### Approaches for Coping with Load
 
