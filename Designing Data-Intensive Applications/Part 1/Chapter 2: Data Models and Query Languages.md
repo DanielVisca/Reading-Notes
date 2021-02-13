@@ -67,3 +67,61 @@ Easier to add new features to applications. Data was laid out in the open. Acces
 #### Comparison to document databases
 
 Document databases use the hierarchical model for records, but for many-to-one and many-to-many relationships it uses foreign-keys/document-reference which is resolved at read time by using joins or follow up queries.
+
+### Relational Versus Document Databases Today
+
+Benefits of document model:
+
+* schema flexibility.
+* better performance due to locality.
+* for some applications it is closer to the data structures used by the application.
+
+Benefits of relational model:
+
+* better support for joins.
+* better at many-to-one and many-to-many relationships.
+
+#### Which data model leads to simpler application code?
+
+If the data in your application has a document-like structure (i.e. a tree of one-to-many relationships, where typically the entire tree is loaded at once), the you should probably use the document modal. The relational technique of *shredding* -splitting a document like structure into multiple tables can lead to a cumbersome schema and needlessly complicated code.
+
+If your application uses many-to-many relationships then the document model is less appealing.
+
+(NOTE: Can joins be done with mongoDB? Or must they be done at the application level?)
+Application level joins are less efficient and adds complexity to the application.
+
+For highly interconnected data, the document model is awkward, the relational model is acceptable, and the graph model are the most natural.
+
+#### Schema flexibility in the document model
+
+Document models usually have an 'implicit' schema that is not enforced by the database The application is expecting a certain format but only validates when the data is read *schema-on-read*.
+
+How to enforcement a schema has no right or wrong answer.
+
+Schema changes have a reputation of being time consuming (for relational), they don't always have to be. MySQL is an exception as it's method takes a long time (but can be circumvented).
+
+Some reasons for wanting flexible schemas:
+
+* There are many different types of objects and it is not practical to have a table for all of them
+* The structure of the data is determined by external sources over which you have no control and may change over time.
+
+#### Data locality for queries
+
+If your application often needs to access the entire document (ex: render on webpage), there is a performance advantage to *storage locality*. If data is split across tables, this could be a hinderance.
+
+(NOTE: For my current project (Veracity), an article has copies of mbfc data. This is duplication. Each document should have a reference.)
+
+The database model needs to load the whole document even if you only need a small portion of it. Locality is only beneficial when you need most of the document on every lookup.
+
+Document updates usually rewrite the entire document causing them to be inefficient.
+
+General recommendation:
+
+* Keep documents small.
+* avoid writes that increase the size of a document.
+
+Googles spanner database offers locality properties in a relational database.
+
+Oracle uses *multi table indexing cluster tables* to do the same.
+
+#### Convergence of document and relational databases

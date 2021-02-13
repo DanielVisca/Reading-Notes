@@ -20,7 +20,7 @@
 * Fault: one component of the system deviating from the spec.
 * Failure: System as a whole stops providing the required service to the user.
 
-Best to design fault-resistant systems. Ex: Chaos Monkey: It consistently tries randomized use cases to break the code application. Doing this reveals faults quicky and continuously.
+Best to design fault-resistant systems. Ex: Chaos Monkey: It consistently tries randomized use cases to break the code application. Doing this reveals faults quickly and continuously.
 
 **Security**: Focus on failure prevention over fault-resistant (single failure could release critical information)
 
@@ -39,7 +39,7 @@ Usually caused by dormant assumptions about the environment it will run in. Ther
 * Process isolation.
 * Allowing processes to crash and restart.
 * Measuring, Monitoring and analyzing system behaviour in production.
-* If a system provides some guarantee, have regular automated checks while it is running and be alerted if there is a descrepency.
+* If a system provides some guarantee, have regular automated checks while it is running and be alerted if there is a discrepancy.
 
 #### Human Errors
 
@@ -47,7 +47,7 @@ The most common cause of outages. Usually due to human configs.
 
 To mitigate:
 
-* Design systems to minimize oppurtunity for error: ex: APIs, abstraction etc...
+* Design systems to minimize opportunity for error: ex: APIs, abstraction etc...
 * Decouple places where people make the most mistakes and the places likely to cause failure. ex: use sandbox with fully featured non-prod environments with real data that does not affect users.
 * Testing... lots of testing
 * Allow quick recovery: ex: fast rollback of changes, gradually release new changes so number of people affected are minimal.
@@ -94,19 +94,19 @@ Good architecture usually uses a combination of the two. (NOTE: I have previousl
 
 There can be manual or elastic scaling.
 
-Possible future trend toward distributed datasystems but for the time being common wisdom is to scale up until you have to scale out. Keep your data in one system until you should split it up due to scale.
+Possible future trend toward distributed data-systems but for the time being common wisdom is to scale up until you have to scale out. Keep your data in one system until you should split it up due to scale.
 
 There is no *magic scaling sauce* one size fits all scalable architecture. The architecture for scaling is usually specific for the application.
 
-"An achitecture that scales well for a particular application is built around assumptions of which operations will be common and which will be rare".
+"An architecture that scales well for a particular application is built around assumptions of which operations will be common and which will be rare".
 
 Early stage start up, it is more important to be able to iterate quickly on product features than it is to scale to some hypothetical future load.
 (Note: Point taken, no point scaling until you can reliably have enough growth that you will have to scale. Step 1 get growth, step to scale.)
 
 ### Maintainability
 
-* Operabity: Make it easy for operations team to keep the system running smoothly.
-* Simplicty: Make it easy for new engineers to understand the system by removing complexity (this does not mean simple interfaces)
+* Operability: Make it easy for operations team to keep the system running smoothly.
+* Simplicity: Make it easy for new engineers to understand the system by removing complexity (this does not mean simple interfaces)
 * Evolvability/Extensibility/Modifiability/Plasticity: Make it easy for engineers to make changes to the system in the future, adapting it for unanticipated use cases.
 
 #### Operability: Making Life Easier for Operations
@@ -117,7 +117,7 @@ They are typically responsible for:
 * Monitoring the health of the system and quickly restoring it if things go wrong
 * Tracking down the cause of problems such as system failures or degrading performance
 * Keeping software and platforms up to date, including security patches
-* Keeping tabs on how different systems affect eachother, so that a problematic change can be avoided before it causes damage.
+* Keeping tabs on how different systems affect each other, so that a problematic change can be avoided before it causes damage.
 * Anticipating future problems and solving them before they occur.
 * etc... (Okay I get it they do a lot of super important stuff)
 
@@ -133,7 +133,7 @@ Abstraction is when you still use something but its implementation saves you fro
 
 #### Evolvability: Making Change Easy
 
-Agile working patterns and community provide framework for adapting to change. They have also developed technical tools and patterns for frequently changing environments such as 
+Agile working patterns and community provide framework for adapting to change. They have also developed technical tools and patterns for frequently changing environments such as:
 
 * Test-driven development (TDD)
 * Refactoring
