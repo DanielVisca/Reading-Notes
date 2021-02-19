@@ -263,4 +263,3 @@ This language is less convenient for one off queries but can cope better for wit
 
 * document databases target use cases where data comes in self-contained documents and relationships between one document and another are rare.
 * graph databases go in the opposite direction, tageting use cases where anything is potentially related to everything.
-
