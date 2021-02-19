@@ -125,3 +125,52 @@ Googles spanner database offers locality properties in a relational database.
 Oracle uses *multi table indexing cluster tables* to do the same.
 
 #### Convergence of document and relational databases
+
+PostgreSQL and MySQL have added support for JSON documents. Other relational databases are likely to follow suit. MongoDB automatically resolves joins through references however this is less optimized than a relational join.
+Relational and document models are becoming more similar over time as they complement each other. A hybrid model is a good route for future databases.
+
+### Query Languages for Data
+
+* Declarative query language: looks like relational algebra where the conditions that must be met are specified but how that is done is not specified. It is instead taken care of by the system's query optimizer.
+* Imperative query language: Tells the computer to perform a certain operation in a certain order. This resembles code.
+
+Declarative languages are attractive because they add an extra layer of abstraction. A facade. This allows for improvement performances to be done behind the scenes without changing the queries.
+
+The fact that SQL is more limited in functionality gives the databases much more room for automatic optimizations.
+
+Imperative languages are difficult to execute in parallel as the specific instructions of how to run the query are specified, whereas declarative languages abstract away the specific implementation and can more easily have a query executed in parallel.
+
+### Declarative Queries on the Web
+
+CSS and XSL are both declarative languages. This simplifies how to find the correct elements in HTML. For example in css.
+
+```css
+li.selected > p {
+    background-color: blue;
+}
+```
+
+The CSS selector `li.selected > p` declares the pattern of elements to which we want to apply the blue style: namely, all `<p>` elements whose direct parent is an `<li>` element is a CSS class of `selected`.
+
+This provides the conditions that must be met but not how to search for elements that meet these conditions.
+
+Alternatively we would have to use JavaScript to implement this functionality through some very messy code that is difficult to change or update and must be done manually.
+
+(NOTE: He mentions 'imperative query APIs' which is what JavaScripts `document.getElementById('selected')` is. I have not thought of this as an API before.)
+
+### MapReduce Querying
+
+*MapReduce* is a programming model for processing large amounts of data in bulk across many machines, popularized by Google.
+
+MongoDB uses a limited version of this for performing read-only queries across many documents.
+
+This combines both declarative and imperative languages. The overall structure of a query may be declarative, however there can be pure functions that are called when certain tables or conditions are met that.
+
+MongoDB uses a query language called *aggregation pipeline* which uses a JSON based language and essentially is reinventing SQL. (NOTE: I have had some experience with this language when using `$`)
+
+A usability issue with MapReduce is that you need to write 2 carefully crafted Javascript functions which can be harder than writing a single query. That is why MongoDB added support for aggregation pipeline.
+
+Moral of the story: NoSQL may find itself reinventing SQL albeit in disguise.
+
+### Graph-Like Data Models
+
