@@ -129,7 +129,7 @@ Oracle uses *multi table indexing cluster tables* to do the same.
 PostgreSQL and MySQL have added support for JSON documents. Other relational databases are likely to follow suit. MongoDB automatically resolves joins through references however this is less optimized than a relational join.
 Relational and document models are becoming more similar over time as they complement each other. A hybrid model is a good route for future databases.
 
-### Query Languages for Data
+## Query Languages for Data
 
 * Declarative query language: looks like relational algebra where the conditions that must be met are specified but how that is done is not specified. It is instead taken care of by the system's query optimizer.
 * Imperative query language: Tells the computer to perform a certain operation in a certain order. This resembles code.
@@ -172,5 +172,95 @@ A usability issue with MapReduce is that you need to write 2 carefully crafted J
 
 Moral of the story: NoSQL may find itself reinventing SQL albeit in disguise.
 
-### Graph-Like Data Models
+## Graph-Like Data Models
+
+What happens if many-to-many relationships are very common in your data? It becomes natural to model your data as a graph.
+
+Graphs consist of two kinds of objects:
+
+* vertices (a.k.a. nodes or entities)
+* edges (a.k.a. relationships or arcs)
+
+Examples:
+
+* Social graphs: Vertices are people and edges indicate which people know each other.
+* The web graph: Vertices are web pages and the edges indicate HTML links to other pages.
+* Road or rail networks: Vertices are junctions, and edges represent the roads or railway lines between them.
+
+Graphs do not require that all vertices or edges are the same type. Facebook uses vertices for people, locations, events etc...
+
+The following are ways to structure and query graphs.
+
+### Property Graphs
+
+Vertex contains:
+
+* unique ID
+* set of outgoing edges
+* set of incoming edges
+* collection of properties (key-value pairs)
+
+Edge contains:
+
+* unique ID
+* vertex where the edge starts (tail vertex)
+* head vertex
+* label describing the kind of relationship between the two vertices
+* a collection of properties (key-value pairs)
+
+This can be stored in two relational tables. One for Vertices and one for Edges.
+
+Graphs are good for evolvability. Just add new vertices and edges to add new types of relationships with new things.
+
+### The Cypher Query Language
+
+*Cypher* is a declarative query language for property graphs. It is named after the character in the matrix not after cryptography.
+
+The language is quite comprehensive but does not specify how to look for the query, just the conditions that must be met.
+
+### Graph Queries in SQL
+
+You can have a graph in SQL and query it with SQL but there are some difficulties. The number of JOINS is not fixed in advanced (as it usually is with most SQL queries) as the query could be trying to find a relationship that is a chained together rather than one link away. SQL can handle this using *recursive common table expressions* the syntax us 'WITH RECURSIVE'. But the query syntax becomes quite clunky.
+
+An easy indication on if you are using the correct data model is how large and cumbersome your queries are, the smaller and simpler the better.
+
+### Triple-Stores and SPARQL
+
+The triple-store model is very similar to the property graph model.
+
+All information is stored in very simple three part statements (Subject, verb, object) example (Jim, likes, bananas). Hence 'triple-store'. The subject is a vertex. The object is either a vertex or a primitive datatype. If it is a primitive datatype is is essentially a property of the subject (Lucy, age, 33).
+
+#### The semantic web
+
+This is completely separate from triple-stores but are usually linked in peoples minds.
+The idea is that webpages right now are computer readable but the same method could be used for computer readable data. The internet would essentially become a database of everything. There was a lot of hype on this in the 2000s but not much has happened.
+
+#### The RDF data model
+
+The *Resource Description Framework* was a standardized way for data to be published on the web for the semantic web.
+
+#### The SPARQL query language
+
+A query language for triple-store using the RDF data model. Pronounced *sparkle*.
+
+It is a very concise language and looks like a combination of SQL and Cypher. A language that we should consider using internally for applications.
+
+### Graph Databases Compared to the Network Model
+
+In summary, they are very different and the graph database is not repeating history.
+
+### The Foundation: Datalog
+
+A much older language that other query languages build on. Essentially what C is for programming languages.
+
+Similar to triple-store except instead of *(subject, predicate, object)* it is written as *predicate(subject, object)*.
+
+Complicated queries can be built up bit by bit through *rules*. Similar to how functions can call other functions. We can define new predicates that we use further down in the query.
+
+This language is less convenient for one off queries but can cope better for with complicated data.
+
+## Summary
+
+* document databases target use cases where data comes in self-contained documents and relationships between one document and another are rare.
+* graph databases go in the opposite direction, tageting use cases where anything is potentially related to everything.
 
